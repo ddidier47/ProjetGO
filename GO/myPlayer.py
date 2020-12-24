@@ -29,15 +29,15 @@ class myPlayer(PlayerInterface):
         white_stones = self._board._nbWHITE
         diff = black_stones - white_stones
         if self._board._nextPlayer == Goban.Board._BLACK:
-            self._board.pop()
+            #self._board.pop()
             return diff
         else:
-            self._board.pop()
+            #self._board.pop()
             return -1 * diff
     
     def best_result(self, max_depth, eval_fn):
         if max_depth == 0:
-            return eval_fn()
+            return eval_fn
         if(self._mycolor == Goban.Board._BLACK):
             best_so_far = -1 * self._board._nbWHITE
         else:
@@ -64,7 +64,7 @@ class myPlayer(PlayerInterface):
         
         moves = self._board.legal_moves() # Dont use weak_legal_moves() here!
         #move = choice(moves) 
-        move = self.best_result(2, self.capture_diff)
+        move = self.best_result(2, self.capture_diff())
         print("MY MOOVE ", move)
         self._board.push(move)
         # New here: allows to consider internal representations of moves
